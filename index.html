@@ -6,26 +6,32 @@
   <title>RX Boss — Florida Prescribed Burn GO / NO-GO</title>
   <style>
     :root{
-      --bg:#0b1020;
-      --panel:#0f172a;
-      --panel2:#0b1224;
-      --text:#e5e7eb;
-      --muted:#9ca3af;
+      /* 🔥 Fire / red theme */
+      --bg:#12060a;
+      --panel:#1a0b10;
+      --panel2:#14080d;
+      --text:#ffeef2;
+      --muted:#f3b7c2;
       --line:rgba(255,255,255,.10);
-      --blue:#60a5fa;
+
+      /* keep variable name so we don’t rewrite CSS selectors */
+      --blue:#fb7185;
+
       --green:#34d399;
       --amber:#fbbf24;
       --red:#fb7185;
-      --pill:#0b1020;
-      --shadow: 0 20px 60px rgba(0,0,0,.40);
+
+      --pill:#12060a;
+      --shadow: 0 20px 60px rgba(0,0,0,.45);
     }
     *{box-sizing:border-box}
     body{
       margin:0;
       font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
-      background: radial-gradient(1200px 600px at 30% 10%, rgba(96,165,250,.18), transparent 60%),
-                  radial-gradient(900px 600px at 80% 20%, rgba(52,211,153,.10), transparent 55%),
-                  linear-gradient(180deg, #070a14, var(--bg));
+      background:
+        radial-gradient(1200px 700px at 30% 10%, rgba(251,113,133,.22), transparent 60%),
+        radial-gradient(900px 650px at 80% 20%, rgba(255,120,80,.14), transparent 55%),
+        linear-gradient(180deg, #050206, var(--bg));
       color:var(--text);
       min-height:100vh;
     }
@@ -33,7 +39,7 @@
     h1{margin:0 0 6px;font-size:44px;letter-spacing:-.02em;color:var(--blue)}
     .subtitle{margin:0 0 16px;color:var(--muted)}
     .panel{
-      background: linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+      background: linear-gradient(180deg, rgba(255,255,255,.05), rgba(0,0,0,.12));
       border:1px solid var(--line);
       border-radius:18px;
       box-shadow:var(--shadow);
@@ -44,20 +50,18 @@
       grid-template-columns: 1.2fr .8fr;
       gap:14px;
     }
-    @media (max-width: 980px){
-      .topGrid{grid-template-columns:1fr}
-    }
+    @media (max-width: 980px){ .topGrid{grid-template-columns:1fr} }
     .drop{
       border:2px dashed rgba(255,255,255,.18);
       border-radius:16px;
       padding:22px;
       text-align:center;
-      background: rgba(0,0,0,.16);
+      background: rgba(0,0,0,.20);
       cursor:pointer;
       user-select:none;
       transition:.15s ease;
     }
-    .drop:hover{border-color:rgba(96,165,250,.55)}
+    .drop:hover{border-color:rgba(251,113,133,.55)}
     .drop strong{font-size:18px}
     .small{color:var(--muted);font-size:13px;margin-top:8px}
     .row{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
@@ -70,7 +74,7 @@
       cursor:pointer;
       font-weight:600;
     }
-    button:hover{border-color:rgba(96,165,250,.45)}
+    button:hover{border-color:rgba(251,113,133,.45)}
     .pill{
       display:inline-flex;gap:8px;align-items:center;
       padding:8px 10px;border-radius:999px;
@@ -94,7 +98,7 @@
     .ctrl h3{margin:0 0 8px;font-size:14px;color:var(--text)}
     .ctrl label{display:flex;justify-content:space-between;gap:10px;align-items:center;margin:8px 0;color:var(--muted);font-size:13px}
     .ctrl input[type="number"]{
-      width:110px;
+      width:120px;
       background:rgba(255,255,255,.06);
       border:1px solid var(--line);
       color:var(--text);
@@ -114,14 +118,12 @@
       border:1px solid var(--line);
       border-radius:16px;
       padding:12px 12px 10px;
-      background: linear-gradient(180deg, rgba(255,255,255,.04), rgba(0,0,0,.10));
+      background: linear-gradient(180deg, rgba(255,255,255,.05), rgba(0,0,0,.16));
       position:relative;
       overflow:hidden;
     }
     .cardHeader{display:flex;align-items:flex-start;justify-content:space-between;gap:10px}
-    .title{
-      font-size:16px;font-weight:800;letter-spacing:.01em;margin:0;
-    }
+    .title{font-size:16px;font-weight:800;letter-spacing:.01em;margin:0;}
     .tag{
       padding:4px 10px;border-radius:999px;border:1px solid var(--line);
       font-size:12px;font-weight:800;letter-spacing:.02em;
@@ -130,12 +132,12 @@
     .tag.caution{color:var(--amber);border-color:rgba(251,191,36,.35);background:rgba(251,191,36,.08)}
     .tag.nogo{color:var(--red);border-color:rgba(251,113,133,.35);background:rgba(251,113,133,.08)}
     .kv{margin-top:8px;color:var(--muted);font-size:13px;line-height:1.25}
-    .kv code{color:var(--text);background:rgba(0,0,0,.20);padding:2px 6px;border-radius:8px;border:1px solid var(--line)}
+    .kv code{color:var(--text);background:rgba(0,0,0,.22);padding:2px 6px;border-radius:8px;border:1px solid var(--line)}
     .kv .mono{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace}
     .sep{height:1px;background:var(--line);margin:10px 0}
     .scoreLine{display:flex;justify-content:space-between;align-items:center;color:var(--muted);font-size:12px}
     .bar{height:8px;background:rgba(255,255,255,.08);border:1px solid var(--line);border-radius:999px;overflow:hidden;margin-top:6px}
-    .bar > div{height:100%;background:rgba(96,165,250,.75)}
+    .bar > div{height:100%;background:rgba(251,113,133,.80)}
     .warn{color:var(--muted);font-size:12px;margin-top:8px}
     .footerNote{margin-top:14px;color:var(--muted);font-size:12px}
     a{color:var(--blue)}
@@ -145,7 +147,10 @@
 <body>
   <div class="wrap">
     <h1>RX Boss</h1>
-    <p class="subtitle">Florida Prescribed Burn GO / NO-GO Decision Tool — ranks the <b>best burn candidates</b> by weather + recent rainfall signal.</p>
+    <p class="subtitle">
+      Florida Prescribed Burn GO / NO-GO Decision Tool — ranks the <b>best burn candidates</b> by weather + rainfall signal.
+      <span class="mono" style="opacity:.9">RH uses DAYTIME only</span>.
+    </p>
 
     <div class="topGrid">
       <div class="panel">
@@ -162,7 +167,7 @@
         </div>
 
         <div class="footerNote">
-          Uses NWS API: grid forecast (next 24h worst-case) + nearest station latest precip (last 1/3/6 hours when available).
+          Uses NWS API: grid forecast (next 24h) + nearest station precip. Rain includes <b>last 24 hours</b> when the station reports it.
         </div>
       </div>
 
@@ -171,12 +176,12 @@
           <div class="ctrl">
             <h3>GO / CAUTION / NO-GO thresholds</h3>
 
-            <label>RH GO band (%) <span>
+            <label>RH GO band (DAYTIME %) <span>
               <input id="rhGoMin" type="number" value="30" /> –
               <input id="rhGoMax" type="number" value="55" />
             </span></label>
 
-            <label>RH hard NO-GO (<span class="mono">&lt;</span> / <span class="mono">&gt;</span>) <span>
+            <label>RH hard NO-GO (DAYTIME <span class="mono">&lt;</span> / <span class="mono">&gt;</span>) <span>
               <input id="rhNoGoLow" type="number" value="25" /> /
               <input id="rhNoGoHigh" type="number" value="60" />
             </span></label>
@@ -185,15 +190,18 @@
             <label>Gust max (mph) <input id="gustMax" type="number" value="25" /></label>
             <label>Mixing height min (ft) <input id="mixMin" type="number" value="1200" /></label>
             <label>QPF next 24h max (in) <input id="qpfMax" type="number" value="0.10" step="0.01" /></label>
+
+            <label>Rain last 24h hard NO-GO (in) <input id="rain24NoGo" type="number" value="0.25" step="0.01" /></label>
           </div>
 
           <div class="ctrl">
             <h3>Ranking & display</h3>
             <label>Show top N <input id="topN" type="number" value="10" min="1" max="50" /></label>
             <label>Include NO-GO in list <input id="includeNoGo" type="checkbox" /></label>
-            <label>Penalize recent rain (last ≤6h) <input id="rainPenalty" type="checkbox" checked /></label>
+            <label>Penalize rain last 24h <input id="rain24Penalty" type="checkbox" checked /></label>
             <label>Use QPF (forecast) in scoring <input id="useQpfScore" type="checkbox" checked /></label>
             <button id="btnRecalc">Recalculate</button>
+            <div class="small">Daytime window: <b>9AM–6PM local</b> (NWS point timezone). Change in code if you want.</div>
           </div>
         </div>
       </div>
@@ -205,6 +213,7 @@
 <script>
 /* ---------------------------
    RX Boss — GitHub Pages build
+   Daytime RH + Last-24h Rain + Fire Theme
    --------------------------- */
 
 const UI = {
@@ -217,7 +226,7 @@ const UI = {
   topN: document.getElementById('topN'),
   topNLabel: document.getElementById('topNLabel'),
   includeNoGo: document.getElementById('includeNoGo'),
-  rainPenalty: document.getElementById('rainPenalty'),
+  rain24Penalty: document.getElementById('rain24Penalty'),
   useQpfScore: document.getElementById('useQpfScore'),
 
   rhGoMin: document.getElementById('rhGoMin'),
@@ -228,6 +237,7 @@ const UI = {
   gustMax: document.getElementById('gustMax'),
   mixMin: document.getElementById('mixMin'),
   qpfMax: document.getElementById('qpfMax'),
+  rain24NoGo: document.getElementById('rain24NoGo'),
 };
 
 let STATE = {
@@ -236,15 +246,24 @@ let STATE = {
   cache: new Map(),    // url -> json
 };
 
-// NWS requires a User-Agent contact string (best practice).
-// GitHub Pages JS can't set the real UA, but we can send an Accept header.
+/* ---------------------------
+   Config
+   --------------------------- */
+
+// Daytime window (local time at the point). Adjust if you want:
+// e.g. 10–17, or sunrise/sunset later if you want to get fancy.
+const DAY_START_HOUR = 9;    // 9 AM
+const DAY_END_HOUR   = 18;   // 6 PM (exclusive)
+
+/* ---------------------------
+   Fetch helpers
+   --------------------------- */
+
 async function fetchJson(url){
   if (STATE.cache.has(url)) return STATE.cache.get(url);
 
   const res = await fetch(url, {
-    headers: {
-      "Accept": "application/geo+json,application/json"
-    }
+    headers: { "Accept": "application/geo+json,application/json" }
   });
 
   if(!res.ok){
@@ -256,13 +275,16 @@ async function fetchJson(url){
   return data;
 }
 
+/* ---------------------------
+   Geometry / parsing helpers
+   --------------------------- */
+
 // Basic GeoJSON centroid (works for MultiPolygon/Polygon reasonably for burn units)
 function centroidOfFeature(feat){
   const g = feat.geometry;
   if(!g) return null;
 
   function centroidOfRing(ring){
-    // ring: [[lon,lat],...]
     let x=0,y=0,n=0;
     for(const p of ring){
       if(!Array.isArray(p) || p.length < 2) continue;
@@ -273,16 +295,13 @@ function centroidOfFeature(feat){
   }
 
   function centroidOfPolygon(poly){
-    // poly: [ring0, ring1...]
     if(!Array.isArray(poly) || poly.length===0) return null;
-    return centroidOfRing(poly[0]); // outer ring
+    return centroidOfRing(poly[0]);
   }
 
-  if(g.type === "Polygon"){
-    return centroidOfPolygon(g.coordinates);
-  }
+  if(g.type === "Polygon") return centroidOfPolygon(g.coordinates);
+
   if(g.type === "MultiPolygon"){
-    // average centroids of polygons
     let x=0,y=0,n=0;
     for(const poly of g.coordinates){
       const c = centroidOfPolygon(poly);
@@ -295,7 +314,7 @@ function centroidOfFeature(feat){
   return null;
 }
 
-// Case-insensitive property getter + common synonyms
+// Case-insensitive property getter
 function getPropCI(props, wanted){
   if(!props) return null;
   const keys = Object.keys(props);
@@ -307,7 +326,7 @@ function getPropCI(props, wanted){
 }
 
 function getTract(props){
-  const v = getPropCI(props, "tract") ?? getPropCI(props, "Tract") ?? getPropCI(props, "TRACT");
+  const v = getPropCI(props, "tract");
   if(v === null || v === undefined) return null;
   const s = String(v).trim();
   return s.length ? s : null;
@@ -324,8 +343,6 @@ function fmt(n, d=1){
 
 function clamp(x, a, b){ return Math.max(a, Math.min(b, x)); }
 
-function nowISO(){ return new Date().toISOString(); }
-
 // Parse validTime like: "2026-01-12T13:00:00+00:00/PT1H"
 function parseValidTime(vt){
   const [start, dur] = vt.split("/");
@@ -334,9 +351,8 @@ function parseValidTime(vt){
   return {startMs, endMs};
 }
 
-// Very small ISO-8601 duration parser for PT#H#M
+// Small ISO-8601 duration parser for PT#H#M
 function parseISODuration(d){
-  // examples: PT1H, PT3H, PT30M, PT1H30M
   let ms = 0;
   const mH = d.match(/(\d+)H/);
   const mM = d.match(/(\d+)M/);
@@ -345,7 +361,31 @@ function parseISODuration(d){
   return ms || 0;
 }
 
-// Extract values overlapping the next 24h window
+/* ---------------------------
+   Daytime / timezone helpers
+   --------------------------- */
+
+function localHour(ms, timeZone){
+  try{
+    const parts = new Intl.DateTimeFormat('en-US', { timeZone, hour:'numeric', hour12:false }).formatToParts(new Date(ms));
+    const h = parts.find(p=>p.type==='hour')?.value;
+    return h != null ? Number(h) : null;
+  }catch{
+    return null;
+  }
+}
+
+function isDaytimeStart(ms, timeZone){
+  const h = localHour(ms, timeZone);
+  if(h == null) return false;
+  return (h >= DAY_START_HOUR && h < DAY_END_HOUR);
+}
+
+/* ---------------------------
+   Series slicing
+   --------------------------- */
+
+// Extract values overlapping next 24h window (no time-of-day filter)
 function sliceNext24(values){
   const t0 = Date.now();
   const t1 = t0 + 24*3600e3;
@@ -356,7 +396,6 @@ function sliceNext24(values){
     const val = it.value;
     if(vt == null || val == null) continue;
     const {startMs, endMs} = parseValidTime(vt);
-    // overlap?
     if(endMs <= t0) continue;
     if(startMs >= t1) continue;
     out.push(Number(val));
@@ -364,14 +403,41 @@ function sliceNext24(values){
   return out;
 }
 
-// Worst-case summaries for decision
-function summarizeNext24(grid){
-  // grid = forecastGridData.properties
-  const rh = sliceNext24(grid?.relativeHumidity?.values);
-  const ws = sliceNext24(grid?.windSpeed?.values);
-  const wg = sliceNext24(grid?.windGust?.values);
-  const mh = sliceNext24(grid?.mixingHeight?.values);
-  const qpf = sliceNext24(grid?.quantitativePrecipitation?.values);
+// Extract values overlapping next 24h window AND starting during local daytime
+function sliceNext24Daytime(values, timeZone){
+  const t0 = Date.now();
+  const t1 = t0 + 24*3600e3;
+  const out = [];
+  for(const it of values || []){
+    if(it == null) continue;
+    const vt = it.validTime;
+    const val = it.value;
+    if(vt == null || val == null) continue;
+
+    const {startMs, endMs} = parseValidTime(vt);
+    if(endMs <= t0) continue;
+    if(startMs >= t1) continue;
+
+    // Keep only periods whose START is within local daytime
+    if(!isDaytimeStart(startMs, timeZone)) continue;
+
+    out.push(Number(val));
+  }
+  return out;
+}
+
+/* ---------------------------
+   Forecast summarization
+   --------------------------- */
+
+// Summaries for decision / scoring.
+// RH is daytime-only. Everything else is full next-24 window.
+function summarizeNext24(gridProps, timeZone){
+  const rh = sliceNext24Daytime(gridProps?.relativeHumidity?.values, timeZone);
+  const ws = sliceNext24(gridProps?.windSpeed?.values);
+  const wg = sliceNext24(gridProps?.windGust?.values);
+  const mh = sliceNext24(gridProps?.mixingHeight?.values);
+  const qpf = sliceNext24(gridProps?.quantitativePrecipitation?.values);
 
   const out = {
     rhMin: rh.length ? Math.min(...rh) : null,
@@ -386,26 +452,28 @@ function summarizeNext24(grid){
   return out;
 }
 
-// Latest station precip (mm) last 1/3/6 hours if present
-async function fetchLastRainSignal(observationStationsUrl){
+/* ---------------------------
+   Rain: last 1/3/6 + last 24 hours
+   --------------------------- */
+
+// Latest station precip (mm) last 1/3/6 hours + last 24 hours if present
+async function fetchRainSignal(observationStationsUrl){
   try{
     const stations = await fetchJson(observationStationsUrl);
     const first = stations?.observationStations?.[0];
-    if(!first) return {ok:false, note:"No station list", p1:null,p3:null,p6:null};
+    if(!first) return {ok:false, note:"No station list", p1mm:null,p3mm:null,p6mm:null,p24mm:null, recencyHours:null};
 
     const latestUrl = `${first}/observations/latest`;
     const obs = await fetchJson(latestUrl);
     const p = obs?.properties || {};
 
-    const p1 = (p.precipitationLastHour?.value ?? null);
-    const p3 = (p.precipitationLast3Hours?.value ?? null);
-    const p6 = (p.precipitationLast6Hours?.value ?? null);
+    const p1  = (p.precipitationLastHour?.value ?? null);
+    const p3  = (p.precipitationLast3Hours?.value ?? null);
+    const p6  = (p.precipitationLast6Hours?.value ?? null);
 
-    // Rain recency heuristic:
-    // If precip in last hour >0 -> "≤1h"
-    // else if last3Hours >0 -> "≤3h"
-    // else if last6Hours >0 -> "≤6h"
-    // else "no measurable in last 6h"
+    // Many stations provide this; some don’t.
+    const p24 = (p.precipitationLast24Hours?.value ?? null);
+
     let recencyHours = null;
     if(p1 != null && p1 > 0) recencyHours = 1;
     else if(p3 != null && p3 > 0) recencyHours = 3;
@@ -416,102 +484,17 @@ async function fetchLastRainSignal(observationStationsUrl){
       station:first,
       timestamp: p.timestamp || null,
       p1mm: p1, p3mm: p3, p6mm: p6,
+      p24mm: p24,
       recencyHours
     };
   }catch(e){
-    return {ok:false, note:String(e).slice(0,160), p1mm:null,p3mm:null,p6mm:null, recencyHours:null};
+    return {ok:false, note:String(e).slice(0,160), p1mm:null,p3mm:null,p6mm:null,p24mm:null, recencyHours:null};
   }
 }
 
-// Decision classification
-function classify(summary, thr){
-  // Missing is automatic NO-GO
-  const needed = ["rhMin","rhMax","windMax","gustMax","mixMin","qpfSumIn"];
-  for(const k of needed){
-    if(summary[k] == null) return {status:"NO-GO", reason:`Missing ${k}`};
-  }
-
-  // Hard NO-GO
-  if(summary.rhMin < thr.rhNoGoLow || summary.rhMax > thr.rhNoGoHigh) return {status:"NO-GO", reason:"RH out of bounds"};
-  if(summary.windMax > thr.windMax) return {status:"NO-GO", reason:"Wind too high"};
-  if(summary.gustMax > thr.gustMax) return {status:"NO-GO", reason:"Gusts too high"};
-  if(summary.mixMin < thr.mixMin) return {status:"NO-GO", reason:"Mixing height too low"};
-  if(summary.qpfSumIn > thr.qpfMax) return {status:"NO-GO", reason:"Forecast precip too high"};
-
-  // GO vs CAUTION:
-  const inGoRh = (summary.rhMin >= thr.rhGoMin && summary.rhMax <= thr.rhGoMax);
-  return inGoRh ? {status:"GO", reason:"Within GO envelope"} : {status:"CAUTION", reason:"Inside hard limits, outside GO envelope"};
-}
-
-// Scoring (0–100). Prioritises best weather + penalises recent rain.
-function score(summary, rain, thr, opts){
-  // Base score on midpoints / extremes:
-  const rhMid = (summary.rhMin + summary.rhMax) / 2;
-  const wind = summary.windMax;
-  const gust = summary.gustMax;
-  const mix = summary.mixMin;
-  const qpf = summary.qpfSumIn;
-
-  // RH: peak at 45, fade out
-  const rhScore = (()=>{
-    const ideal = 45;
-    const dist = Math.abs(rhMid - ideal);
-    // 0 dist -> 40, dist 15 -> ~0
-    return clamp(40 * (1 - dist/15), 0, 40);
-  })();
-
-  // Wind: best 6–12, penalty outside
-  const windScore = (()=>{
-    const idealLo = 6, idealHi = 12;
-    if(wind >= idealLo && wind <= idealHi) return 30;
-    if(wind < idealLo){
-      // 0–6 -> scale down
-      return clamp(30 * (wind/idealLo), 0, 30);
-    }
-    // 12–18 -> scale down
-    return clamp(30 * (1 - (wind-idealHi)/(thr.windMax-idealHi)), 0, 30);
-  })();
-
-  // Gust spread / gusts: prefer ≤18
-  const gustScore = (()=>{
-    const good = 18;
-    if(gust <= good) return 10;
-    return clamp(10 * (1 - (gust-good)/(thr.gustMax-good)), 0, 10);
-  })();
-
-  // Mixing height: prefer ≥1700, but accept anything above min
-  const mixScore = (()=>{
-    const good = 1700;
-    if(mix >= good) return 10;
-    return clamp(10 * ((mix - thr.mixMin) / (good - thr.mixMin)), 0, 10);
-  })();
-
-  // QPF: less is better (if enabled)
-  const qpfScore = (()=>{
-    if(!opts.useQpfScore) return 0;
-    // 0 -> 10, thr.qpfMax -> 0
-    return clamp(10 * (1 - (qpf / thr.qpfMax)), 0, 10);
-  })();
-
-  // Recent rain penalty (if enabled)
-  const rainAdj = (()=>{
-    if(!opts.rainPenalty) return 0;
-    // penalize if measurable rain in last 6h. Strongest penalty if ≤1h.
-    if(!rain || rain.recencyHours == null) return 0;
-    if(rain.recencyHours === 1) return -10;
-    if(rain.recencyHours === 3) return -7;
-    if(rain.recencyHours === 6) return -4;
-    return 0;
-  })();
-
-  let total = rhScore + windScore + gustScore + mixScore + qpfScore + rainAdj;
-
-  // If CAUTION (outside GO RH band but still within hard limits), small penalty
-  const inGoRh = (summary.rhMin >= thr.rhGoMin && summary.rhMax <= thr.rhGoMax);
-  if(!inGoRh) total -= 6;
-
-  return clamp(total, 0, 100);
-}
+/* ---------------------------
+   Thresholds / options
+   --------------------------- */
 
 function readThresholds(){
   return {
@@ -523,6 +506,7 @@ function readThresholds(){
     gustMax: Number(UI.gustMax.value),
     mixMin: Number(UI.mixMin.value),
     qpfMax: Number(UI.qpfMax.value),
+    rain24NoGo: Number(UI.rain24NoGo.value),
   };
 }
 
@@ -530,33 +514,147 @@ function readOptions(){
   return {
     topN: Number(UI.topN.value),
     includeNoGo: UI.includeNoGo.checked,
-    rainPenalty: UI.rainPenalty.checked,
+    rain24Penalty: UI.rain24Penalty.checked,
     useQpfScore: UI.useQpfScore.checked,
   };
 }
 
 function setStatus(s){ UI.status.textContent = s; }
 
-function clearAll(){
-  STATE.features = [];
-  STATE.results = [];
-  STATE.cache.clear();
-  UI.cards.innerHTML = "";
-  setStatus("Waiting for GeoJSON…");
+/* ---------------------------
+   Decision classification
+   --------------------------- */
+
+function mmToIn(mm){
+  if(mm == null) return null;
+  return mm / 25.4;
+}
+
+function classify(summary, rain, thr){
+  // Missing forecast essentials -> NO-GO
+  const needed = ["rhMin","rhMax","windMax","gustMax","mixMin","qpfSumIn"];
+  for(const k of needed){
+    if(summary[k] == null) return {status:"NO-GO", reason:`Missing ${k} (daytime RH needs daytime samples)`};
+  }
+
+  // Daytime RH hard NO-GO
+  if(summary.rhMin < thr.rhNoGoLow || summary.rhMax > thr.rhNoGoHigh) return {status:"NO-GO", reason:"DAYTIME RH out of bounds"};
+
+  // Wind / mixing / QPF
+  if(summary.windMax > thr.windMax) return {status:"NO-GO", reason:"Wind too high"};
+  if(summary.gustMax > thr.gustMax) return {status:"NO-GO", reason:"Gusts too high"};
+  if(summary.mixMin < thr.mixMin) return {status:"NO-GO", reason:"Mixing height too low"};
+  if(summary.qpfSumIn > thr.qpfMax) return {status:"NO-GO", reason:"Forecast precip (QPF) too high"};
+
+  // Last-24h rain hard NO-GO (if we have it)
+  const rain24In = rain?.ok ? mmToIn(rain.p24mm) : null;
+  if(rain24In != null && rain24In > thr.rain24NoGo){
+    return {status:"NO-GO", reason:`Too wet: last 24h rain ${rain24In.toFixed(2)} in`};
+  }
+
+  // GO vs CAUTION
+  const inGoRh = (summary.rhMin >= thr.rhGoMin && summary.rhMax <= thr.rhGoMax);
+  return inGoRh ? {status:"GO", reason:"Within GO envelope"} : {status:"CAUTION", reason:"Inside hard limits, outside GO envelope"};
+}
+
+/* ---------------------------
+   Scoring (0–100)
+   Prioritises best weather + penalises rain (last 24h) + optional QPF.
+   --------------------------- */
+
+function score(summary, rain, thr, opts){
+  const rhMid = (summary.rhMin + summary.rhMax) / 2;
+  const wind = summary.windMax;
+  const gust = summary.gustMax;
+  const mix  = summary.mixMin;
+  const qpf  = summary.qpfSumIn;
+
+  // RH: peak at 45, fade out (DAYTIME)
+  const rhScore = (()=>{
+    const ideal = 45;
+    const dist = Math.abs(rhMid - ideal);
+    return clamp(40 * (1 - dist/15), 0, 40);
+  })();
+
+  // Wind: best 6–12, penalty outside
+  const windScore = (()=>{
+    const idealLo = 6, idealHi = 12;
+    if(wind >= idealLo && wind <= idealHi) return 30;
+    if(wind < idealLo) return clamp(30 * (wind/idealLo), 0, 30);
+    return clamp(30 * (1 - (wind-idealHi)/(thr.windMax-idealHi)), 0, 30);
+  })();
+
+  // Gust: prefer <=18
+  const gustScore = (()=>{
+    const good = 18;
+    if(gust <= good) return 10;
+    return clamp(10 * (1 - (gust-good)/(thr.gustMax-good)), 0, 10);
+  })();
+
+  // Mixing height: prefer >=1700, but accept above min
+  const mixScore = (()=>{
+    const good = 1700;
+    if(mix >= good) return 10;
+    return clamp(10 * ((mix - thr.mixMin) / (good - thr.mixMin)), 0, 10);
+  })();
+
+  // QPF: less is better (if enabled)
+  const qpfScore = (()=>{
+    if(!opts.useQpfScore) return 0;
+    return clamp(10 * (1 - (qpf / thr.qpfMax)), 0, 10);
+  })();
+
+  // Rain last 24h penalty (inches). Stronger penalty if >=0.10"
+  const rain24Adj = (()=>{
+    if(!opts.rain24Penalty) return 0;
+    if(!rain || !rain.ok) return 0;
+    const rain24In = mmToIn(rain.p24mm);
+    if(rain24In == null) return 0;
+
+    // 0.00" -> 0 penalty
+    // 0.05" -> -2
+    // 0.10" -> -5
+    // 0.25" -> -10
+    const r = clamp(rain24In, 0, 0.25);
+    return - (r / 0.25) * 10;
+  })();
+
+  let total = rhScore + windScore + gustScore + mixScore + qpfScore + rain24Adj;
+
+  // If CAUTION (outside GO RH band), small penalty
+  const inGoRh = (summary.rhMin >= thr.rhGoMin && summary.rhMax <= thr.rhGoMax);
+  if(!inGoRh) total -= 6;
+
+  return clamp(total, 0, 100);
+}
+
+/* ---------------------------
+   Rendering
+   --------------------------- */
+
+function escapeHtml(s){
+  return String(s ?? "").replace(/[&<>"']/g, (c)=>({
+    "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"
+  }[c]));
 }
 
 function makeCard(r){
   const tagClass = r.decision.status === "GO" ? "ready" : (r.decision.status === "CAUTION" ? "caution" : "nogo");
 
   const rainLine = (() => {
-    if(!r.rain) return "Last rain: —";
-    if(!r.rain.ok) return `Last rain: unknown (${r.rain.note || "station error"})`;
-    const mm = [];
-    if(r.rain.p1mm != null) mm.push(`1h: ${fmt(r.rain.p1mm,2)}mm`);
-    if(r.rain.p3mm != null) mm.push(`3h: ${fmt(r.rain.p3mm,2)}mm`);
-    if(r.rain.p6mm != null) mm.push(`6h: ${fmt(r.rain.p6mm,2)}mm`);
+    if(!r.rain) return "Rain: —";
+    if(!r.rain.ok) return `Rain: unknown (${r.rain.note || "station error"})`;
+
+    const parts = [];
+    if(r.rain.p1mm != null) parts.push(`1h: ${fmt(r.rain.p1mm,2)}mm`);
+    if(r.rain.p3mm != null) parts.push(`3h: ${fmt(r.rain.p3mm,2)}mm`);
+    if(r.rain.p6mm != null) parts.push(`6h: ${fmt(r.rain.p6mm,2)}mm`);
     const rec = r.rain.recencyHours ? `measurable ≤${r.rain.recencyHours}h` : "no measurable in last 6h";
-    return `Last rain: ${rec}${mm.length ? ` (${mm.join(", ")})` : ""}`;
+
+    const p24in = mmToIn(r.rain.p24mm);
+    const p24txt = (p24in == null) ? "24h: —" : `24h: ${p24in.toFixed(2)} in`;
+
+    return `Rain: ${rec}${parts.length ? ` (${parts.join(", ")})` : ""} · ${p24txt}`;
   })();
 
   const scorePct = `${Math.round(r.score)}%`;
@@ -575,7 +673,8 @@ function makeCard(r){
 
       <div class="kv">
         <div>Centroid <code class="mono">${fmt(r.lat,5)}, ${fmt(r.lon,5)}</code></div>
-        <div>RH next 24h (worst): <code>${fmt(r.summary.rhMin,0)}–${fmt(r.summary.rhMax,0)}%</code></div>
+        <div>Timezone: <code class="mono">${escapeHtml(r.timeZone || "—")}</code></div>
+        <div><b>DAYTIME</b> RH next 24h (range): <code>${fmt(r.summary.rhMin,0)}–${fmt(r.summary.rhMax,0)}%</code></div>
         <div>Wind max: <code>${fmt(r.summary.windMax,1)} mph</code> · Gust max: <code>${fmt(r.summary.gustMax,1)} mph</code></div>
         <div>Mixing height min: <code>${fmt(r.summary.mixMin,0)} ft</code></div>
         <div>QPF next 24h sum: <code>${fmt(r.summary.qpfSumIn,2)} in</code></div>
@@ -597,11 +696,19 @@ function makeCard(r){
   `;
 }
 
-function escapeHtml(s){
-  return String(s ?? "").replace(/[&<>"']/g, (c)=>({
-    "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"
-  }[c]));
+function render(){
+  if(!STATE.results.length){
+    UI.cards.innerHTML = `<div class="panel" style="grid-column:1/-1">
+      No results to show. Try “Include NO-GO” or adjust thresholds.
+    </div>`;
+    return;
+  }
+  UI.cards.innerHTML = STATE.results.map(makeCard).join("");
 }
+
+/* ---------------------------
+   Core pipeline
+   --------------------------- */
 
 async function processGeoJSON(geo){
   if(!geo || geo.type !== "FeatureCollection" || !Array.isArray(geo.features)){
@@ -612,7 +719,7 @@ async function processGeoJSON(geo){
   const feats = [];
   for(const f of geo.features){
     const tract = getTract(f.properties);
-    if(!tract) continue; // *** your rule: If none exist → skip ***
+    if(!tract) continue; // rule: If none exist → skip
     const c = centroidOfFeature(f);
     if(!c) continue;
     const [lon, lat] = c;
@@ -635,7 +742,6 @@ async function processGeoJSON(geo){
   }
 
   setStatus(`Loaded ${feats.length} units with Tract. Fetching NWS…`);
-
   await fetchAndRank();
 }
 
@@ -646,24 +752,28 @@ async function fetchAndRank(){
 
   const jobs = STATE.features.map(async (u) => {
     try{
-      // Points -> grid + stations
       const pointsUrl = `https://api.weather.gov/points/${u.lat},${u.lon}`;
       const points = await fetchJson(pointsUrl);
+
       const gridUrl = points?.properties?.forecastGridData;
       const stationsUrl = points?.properties?.observationStations;
+      const timeZone = points?.properties?.timeZone || null;
 
       if(!gridUrl || !stationsUrl) throw new Error("Missing grid or station URL");
 
       const grid = await fetchJson(gridUrl);
-      const summary = summarizeNext24(grid?.properties);
 
-      const rain = await fetchLastRainSignal(stationsUrl);
+      // RH is daytime-only using point timezone. If timezone missing, it will likely drop RH samples.
+      const summary = summarizeNext24(grid?.properties, timeZone || "America/New_York");
 
-      const decision = classify(summary, thr);
+      const rain = await fetchRainSignal(stationsUrl);
+
+      const decision = classify(summary, rain, thr);
       const scoreVal = score(summary, rain, thr, opts);
 
       return {
         ...u,
+        timeZone,
         summary,
         rain,
         decision,
@@ -672,8 +782,9 @@ async function fetchAndRank(){
     }catch(e){
       return {
         ...u,
+        timeZone: null,
         summary: {rhMin:null,rhMax:null,windMax:null,gustMax:null,mixMin:null,qpfSumIn:null},
-        rain: {ok:false, note:"fetch error"},
+        rain: {ok:false, note:"fetch error", p1mm:null,p3mm:null,p6mm:null,p24mm:null},
         decision: {status:"NO-GO", reason:String(e).slice(0,120)},
         score: 0,
       };
@@ -682,7 +793,7 @@ async function fetchAndRank(){
 
   const all = await Promise.all(jobs);
 
-  // Sort: best score first, GO over CAUTION over NO-GO as tie-breaker
+  // Sort: GO over CAUTION over NO-GO, then score
   const rankStatus = (s)=> s==="GO" ? 2 : (s==="CAUTION" ? 1 : 0);
 
   let filtered = all.slice();
@@ -699,25 +810,21 @@ async function fetchAndRank(){
   const top = filtered.slice(0, opts.topN);
 
   STATE.results = top;
-
   setStatus(`Showing ${top.length} ranked candidates (from ${STATE.features.length} units).`);
-
   render();
 }
 
-function render(){
-  if(!STATE.results.length){
-    UI.cards.innerHTML = `<div class="panel" style="grid-column:1/-1">
-      No results to show. Try “Include NO-GO” or adjust thresholds.
-    </div>`;
-    return;
-  }
-  UI.cards.innerHTML = STATE.results.map(makeCard).join("");
-}
-
 /* ---------------------------
-   File input + drag/drop
+   UI wiring
    --------------------------- */
+
+function clearAll(){
+  STATE.features = [];
+  STATE.results = [];
+  STATE.cache.clear();
+  UI.cards.innerHTML = "";
+  setStatus("Waiting for GeoJSON…");
+}
 
 const fileInput = document.createElement('input');
 fileInput.type = 'file';
@@ -735,7 +842,7 @@ fileInput.addEventListener('change', async ()=>{
   fileInput.value = "";
 });
 
-UI.drop.addEventListener('dragover', (e)=>{ e.preventDefault(); UI.drop.style.borderColor="rgba(96,165,250,.55)"; });
+UI.drop.addEventListener('dragover', (e)=>{ e.preventDefault(); UI.drop.style.borderColor="rgba(251,113,133,.55)"; });
 UI.drop.addEventListener('dragleave', ()=>{ UI.drop.style.borderColor="rgba(255,255,255,.18)"; });
 UI.drop.addEventListener('drop', async (e)=>{
   e.preventDefault();
@@ -772,7 +879,6 @@ UI.btnRecalc.addEventListener('click', async ()=>{
 UI.topN.addEventListener('input', ()=>UI.topNLabel.textContent = UI.topN.value);
 
 UI.btnDemo.addEventListener('click', async ()=>{
-  // Tiny demo FeatureCollection with fake polygons + Tract fields
   const demo = {
     type:"FeatureCollection",
     features:[
