@@ -1,0 +1,83 @@
+# RX Boss – Florida Prescribed Burn GO / NO-GO
+
+RX Boss is a lightweight, single-file web tool designed to support **Florida prescribed burn bosses** with rapid, defensible GO / CAUTION / NO-GO decisions.
+
+The tool consumes **live National Weather Service (NWS) Gridpoint data** for each burn compartment, evaluates worst-case fire-behavior conditions over the next 24 hours, and clearly explains *why* a unit is recommended or disqualified.
+
+## Key Principles
+- **Never fake weather**  
+  If live NWS data is unavailable or incomplete, the unit is automatically marked **NO-GO** with a clear “WEATHER UNKNOWN” explanation.
+
+- **Zero keys, zero installs**  
+  Runs entirely in the browser. No API keys, servers, or build steps.
+
+- **Single-file deployment**  
+  One `index.html` file. Works locally or hosted via GitHub Pages.
+
+- **Burn-boss trust first**  
+  Every decision is transparent, conservative, and traceable to NWS grid data.
+
+## How It Works
+1. User drags in a GeoJSON of burn compartments (Florida CRS / WGS84).
+2. The tool computes each compartment’s centroid.
+3. Live NWS Gridpoint data is fetched for:
+   - Temperature
+   - Relative humidity
+   - Sustained wind
+   - Wind gusts
+   - Wind direction
+   - Mixing height
+   - Forecast precipitation (QPF)
+4. Worst-case values for the next 24 hours are evaluated.
+5. Each unit is labeled:
+   - **GO**
+   - **CAUTION**
+   - **NO-GO**
+6. Cards display **LIVE / CACHED / OFFLINE** status with timestamps.
+
+## Decision Logic (Florida-Focused)
+**GO envelope**
+- RH: 30–55%
+- Wind: 5–15 mph
+- Gusts ≤20 mph
+- Mixing height ≥1700 ft
+
+**CAUTION**
+- RH 25–29% or 56–60%
+- Wind 16–18 mph
+- Gusts 21–25 mph
+- Mixing height 1200–1699 ft
+
+**NO-GO**
+- RH <25% or >60%
+- Wind >18 mph
+- Gusts >25 mph
+- Mixing height <1200 ft
+- Any missing or offline weather variable
+
+## Data Integrity
+- Uses **NWS forecastGridData only** (no text forecasts)
+- Correctly parses NWS `validTime` intervals
+- Converts all units to:
+  - °F
+  - mph
+  - feet
+  - inches
+- Clearly labels **Forecast QPF** (no false “hours since rain” claims)
+
+## Offline & Caching Behavior
+- Local cache (6–12 hours) per compartment
+- Explicit badges:
+  - **LIVE**
+  - **CACHED @ time**
+  - **OFFLINE**
+- Offline or blocked data always results in **NO-GO**
+
+## Intended Use
+Decision **support**, not automation.  
+Designed to augment professional judgment and provide defensible, explainable weather screening for prescribed fire planning on Florida state lands.
+
+---
+
+## Hosting
+This project is intended to be hosted via **GitHub Pages** to avoid browser CORS restrictions when accessing NWS APIs.
