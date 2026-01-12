@@ -1,35 +1,334 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>RX Boss</title>
-  <style>
-    body {
-      background: #0e1117;
-      color: #e6edf3;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-      padding: 40px;
-    }
-    h1 {
-      color: #58a6ff;
-    }
-    .box {
-      border: 2px dashed #30363d;
-      padding: 40px;
-      margin-top: 30px;
-      text-align: center;
-      border-radius: 10px;
-    }
-  </style>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>RX Boss – Florida Prescribed Burn GO / NO-GO</title>
+<style>
+  :root{
+    --bg:#0b0e13;
+    --panel:#0f141c;
+    --card:#121a24;
+    --border:rgba(255,255,255,.10);
+    --border2:rgba(255,255,255,.16);
+    --text:#e9eef6;
+    --muted:rgba(233,238,246,.70);
+    --accent:#58a6ff;
+    --good:#3ddc97;
+    --warn:#ffd166;
+    --bad:#ff5c5c;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    background:radial-gradient(1200px 600px at 20% 0%, rgba(88,166,255,.14), transparent 60%),
+               radial-gradient(1000px 500px at 80% 10%, rgba(61,220,151,.10), transparent 55%),
+               var(--bg);
+    color:var(--text);
+    min-height:100vh;
+  }
+  .wrap{max-width:1100px;margin:0 auto;padding:32px 18px 60px}
+  h1{margin:0 0 6px;font-size:44px;letter-spacing:.2px;color:var(--accent)}
+  .sub{margin:0 0 22px;color:var(--muted);font-size:16px}
+  .panel{
+    background:linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.01));
+    border:1px solid var(--border);
+    border-radius:14px;
+    padding:18px;
+  }
+
+  .dropzone{
+    border:2px dashed rgba(255,255,255,.20);
+    border-radius:14px;
+    padding:42px 18px;
+    text-align:center;
+    cursor:pointer;
+    user-select:none;
+    background:rgba(255,255,255,.02);
+    transition:.15s ease;
+  }
+  .dropzone:hover{border-color:rgba(88,166,255,.55); background:rgba(88,166,255,.06)}
+  .dz-title{font-size:18px;margin-bottom:6px}
+  .dz-note{font-size:13px;color:var(--muted)}
+  .dz-note code{background:rgba(255,255,255,.06);padding:2px 6px;border-radius:6px}
+  .msg{margin:12px 2px 0;color:var(--muted);font-size:14px}
+
+  .row{
+    display:flex;gap:12px;align-items:center;flex-wrap:wrap;
+    margin-top:14px
+  }
+  .pill{
+    font-size:12px;
+    padding:6px 10px;
+    border-radius:999px;
+    border:1px solid var(--border2);
+    color:var(--muted);
+    background:rgba(255,255,255,.03);
+  }
+  .pill b{color:var(--text)}
+  .pill a{color:var(--accent);text-decoration:none}
+  .pill a:hover{text-decoration:underline}
+
+  .cards{
+    display:grid;
+    gap:12px;
+    grid-template-columns:repeat(auto-fill, minmax(280px, 1fr));
+    margin-top:16px;
+  }
+  .card{
+    background:linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.01));
+    border:1px solid var(--border);
+    border-radius:14px;
+    padding:14px 14px 12px;
+  }
+  .top{
+    display:flex;align-items:center;gap:10px;
+  }
+  .id{
+    font-weight:700;
+    font-size:16px;
+    letter-spacing:.2px;
+  }
+  .status{
+    margin-left:auto;
+    font-size:11px;
+    padding:4px 8px;
+    border-radius:7px;
+    border:1px solid var(--border2);
+    color:var(--muted);
+    background:rgba(255,255,255,.03);
+  }
+  .status.ready{border-color:rgba(61,220,151,.35); color:#bff2dd; background:rgba(61,220,151,.08)}
+  .status.bad{border-color:rgba(255,92,92,.45); color:#ffd0d0; background:rgba(255,92,92,.08)}
+  .why{margin-top:10px;font-size:13px;color:var(--muted);line-height:1.35}
+  .kv{margin-top:10px;display:grid;grid-template-columns:auto 1fr;gap:6px 10px;font-size:13px}
+  .k{color:rgba(233,238,246,.55)}
+  .v{color:rgba(233,238,246,.90);font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace}
+  .hint{margin-top:10px;font-size:12px;color:rgba(233,238,246,.55)}
+  .btnbar{display:flex;gap:10px;margin-top:14px;flex-wrap:wrap}
+  .btn{
+    border:1px solid var(--border2);
+    background:rgba(255,255,255,.03);
+    color:var(--text);
+    padding:8px 10px;
+    border-radius:10px;
+    font-size:12px;
+    cursor:pointer;
+  }
+  .btn:hover{border-color:rgba(88,166,255,.55); background:rgba(88,166,255,.08)}
+  .btn.danger:hover{border-color:rgba(255,92,92,.55); background:rgba(255,92,92,.08)}
+</style>
 </head>
 <body>
+  <div class="wrap">
+    <h1>RX Boss</h1>
+    <p class="sub">Florida Prescribed Burn GO / NO-GO Decision Tool (Step 1: GeoJSON intake + card build)</p>
 
-<h1>RX Boss</h1>
-<p>Florida Prescribed Burn GO / NO-GO Decision Tool</p>
+    <div class="panel">
+      <div class="dropzone" id="dz">
+        <div class="dz-title">Drop GeoJSON burn units here (or click to select)</div>
+        <div class="dz-note">Accepts <code>.geojson</code> or <code>.json</code> FeatureCollections. If coordinates aren’t lon/lat → shows <b>BAD CRS?</b></div>
+      </div>
 
-<div class="box">
-  Drag GeoJSON burn units here (coming next)
-</div>
+      <input id="file" type="file" accept=".geojson,.json,application/json" style="display:none" />
 
+      <div class="row">
+        <div class="pill"><b>Status:</b> Upload a file to generate cards</div>
+        <div class="pill"><b>Tip:</b> Best export is WGS84 / EPSG:4326</div>
+        <div class="pill"><b>Next:</b> Add NWS fetch + GO/NO-GO thresholds</div>
+      </div>
+
+      <div class="msg" id="msg"></div>
+      <div class="btnbar">
+        <button class="btn" id="demo">Load demo data</button>
+        <button class="btn danger" id="clear">Clear</button>
+      </div>
+
+      <div class="cards" id="cards"></div>
+    </div>
+  </div>
+
+<script>
+/* =========================
+   UI WIRING
+========================= */
+const dz = document.getElementById("dz");
+const fileInput = document.getElementById("file");
+const cardsEl = document.getElementById("cards");
+const msgEl = document.getElementById("msg");
+const demoBtn = document.getElementById("demo");
+const clearBtn = document.getElementById("clear");
+
+dz.addEventListener("click", () => fileInput.click());
+
+fileInput.addEventListener("change", async (e) => {
+  const f = e.target.files?.[0];
+  if (f) await handleFile(f);
+});
+
+dz.addEventListener("dragover", (e) => {
+  e.preventDefault();
+  dz.style.borderColor = "rgba(88,166,255,.75)";
+  dz.style.background = "rgba(88,166,255,.10)";
+});
+dz.addEventListener("dragleave", () => {
+  dz.style.borderColor = "rgba(255,255,255,.20)";
+  dz.style.background = "rgba(255,255,255,.02)";
+});
+dz.addEventListener("drop", async (e) => {
+  e.preventDefault();
+  dz.style.borderColor = "rgba(255,255,255,.20)";
+  dz.style.background = "rgba(255,255,255,.02)";
+  const f = e.dataTransfer.files?.[0];
+  if (f) await handleFile(f);
+});
+
+clearBtn.addEventListener("click", () => {
+  cardsEl.innerHTML = "";
+  msgEl.textContent = "";
+  fileInput.value = "";
+});
+
+demoBtn.addEventListener("click", () => {
+  const demo = {
+    type:"FeatureCollection",
+    features:[
+      {
+        type:"Feature",
+        properties:{Ident:"Demo-Unit-01"},
+        geometry:{type:"Polygon",coordinates:[[[-82.60,28.98],[-82.59,28.98],[-82.59,28.99],[-82.60,28.99],[-82.60,28.98]]]}
+      },
+      {
+        type:"Feature",
+        properties:{NAME:"Demo-Unit-02"},
+        geometry:{type:"Polygon",coordinates:[[[-82.62,28.97],[-82.61,28.97],[-82.61,28.98],[-82.62,28.98],[-82.62,28.97]]]}
+      }
+    ]
+  };
+  buildCards(demo, "demo.geojson");
+});
+
+/* =========================
+   CORE: FILE -> JSON -> CARDS
+========================= */
+async function handleFile(file){
+  cardsEl.innerHTML = "";
+  msgEl.textContent = `Reading ${file.name}…`;
+
+  let geo;
+  try{
+    geo = JSON.parse(await file.text());
+  }catch{
+    msgEl.textContent = "❌ That file isn’t valid JSON.";
+    return;
+  }
+
+  buildCards(geo, file.name);
+}
+
+function buildCards(geo, filename){
+  cardsEl.innerHTML = "";
+
+  if(!geo || geo.type !== "FeatureCollection" || !Array.isArray(geo.features)){
+    msgEl.textContent = "❌ Needs a GeoJSON FeatureCollection with features[].";
+    return;
+  }
+
+  const feats = geo.features.filter(f => f && f.geometry);
+  if(!feats.length){
+    msgEl.textContent = "❌ No usable features found (missing geometry).";
+    return;
+  }
+
+  msgEl.textContent = `✅ Loaded ${feats.length} feature(s) from ${filename}.`;
+
+  for(const f of feats){
+    const id = pickId(f.properties);
+    const center = centroidLonLat(f.geometry);
+    const ok = center && isLonLat(center[0], center[1]);
+
+    const card = document.createElement("div");
+    card.className = "card";
+    card.innerHTML = `
+      <div class="top">
+        <div class="id">${escapeHtml(String(id))}</div>
+        <div class="status ${ok ? "ready" : "bad"}">${ok ? "READY" : "BAD CRS?"}</div>
+      </div>
+
+      <div class="why">
+        ${ok
+          ? "Geometry looks like lon/lat. Good to proceed to weather + GO/NO-GO."
+          : "Coordinates don’t look like lon/lat. Re-export GeoJSON as WGS84 (EPSG:4326) or we add a projection step."}
+      </div>
+
+      <div class="kv">
+        <div class="k">Centroid</div>
+        <div class="v">${center ? `${fmt(center[1])}, ${fmt(center[0])}` : "n/a"}</div>
+
+        <div class="k">Geometry</div>
+        <div class="v">${escapeHtml(f.geometry?.type || "n/a")}</div>
+
+        <div class="k">Props</div>
+        <div class="v">${escapeHtml(Object.keys(f.properties || {}).slice(0,8).join(", ") || "none")}</div>
+      </div>
+
+      <div class="hint">
+        Next step: compute NWS gridpoint for centroid → evaluate RH/wind/gust/mixing height/QPF → GO/CAUTION/NO-GO.
+      </div>
+    `;
+    cardsEl.appendChild(card);
+  }
+}
+
+/* =========================
+   HELPERS
+========================= */
+function pickId(props){
+  if(!props) return "unknown";
+  return props.Ident ?? props.ID ?? props.id ?? props.NAME ?? props.Name ?? props.Unit ?? props.UnitName ?? "unknown";
+}
+
+function escapeHtml(s){
+  return s.replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+
+function isLonLat(lon, lat){
+  return Number.isFinite(lon) && Number.isFinite(lat) && Math.abs(lon) <= 180 && Math.abs(lat) <= 90;
+}
+
+function fmt(n){
+  if(!Number.isFinite(n)) return "n/a";
+  return n.toFixed(5);
+}
+
+function centroidLonLat(geom){
+  // Works when coords are already lon/lat (EPSG:4326)
+  // If projected CRS (meters/feet), you’ll get "BAD CRS?"
+  if(!geom) return null;
+
+  let poly = null;
+  if(geom.type === "Polygon") poly = geom.coordinates;
+  if(geom.type === "MultiPolygon") poly = geom.coordinates?.[0];
+
+  if(!poly || !poly[0] || poly[0].length < 3) return null;
+
+  const ring = poly[0];
+  let cx=0, cy=0, a=0;
+
+  for(let i=0;i<ring.length-1;i++){
+    const [x1,y1] = ring[i];
+    const [x2,y2] = ring[i+1];
+    const f = x1*y2 - x2*y1;
+    cx += (x1 + x2) * f;
+    cy += (y1 + y2) * f;
+    a  += f;
+  }
+
+  if(a === 0) return ring[0];
+  a *= 3;
+  return [cx/a, cy/a]; // [lon, lat]
+}
+</script>
 </body>
 </html>
